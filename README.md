@@ -8,4 +8,4 @@ One is selected and the Elo rating of both are passed to the expected point func
 Using a combination of the actual outcome (0 or 1) along with the expected, new Elo ratings are produced
 
 Languages used: html/css for input and styling, javascript for functionality
-https://elliotfriesencode.github.io/elo
+https://elliotfriesencode.github.io/elo/
