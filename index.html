@@ -1,0 +1,159 @@
+<html>
+    <head>
+   <link rel="stylesheet"  href="styles.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+      
+    <div class="center">
+     <div class="box-left">
+        <div class="choose-header-div">
+        <h1 class="choice-header">Make a Choice</h1>
+    </div>
+        <div class="choose-main-box">
+            <div class="option" onclick="alertId(this.id)">
+               
+            </div>
+            <div class="option" onclick="alertId(this.id)">
+                
+            </div>
+        </div>
+     </div>
+     <div class="box-right">
+        <div class="ranking-header-div">
+            <h1 class="ranking">Ranking</h1>
+        </div>
+        <div class="ranking-holder">
+            <ol class="list-holder" id="list">
+               
+              </ol>
+        </div>
+    </div>
+    </div>
+    <script>
+        
+        let items = [["a", 500, 0], ["b", 500, 1], ["c", 500, 2], ["d", 500, 3],
+                    ["e", 500, 4], ["f", 500, 5], ["g", 500, 6]];
+        let eloConstant = 32;
+        randomChoice();
+        rank();
+        function rank(){
+            
+        var list = document.getElementById("list");
+        while (list.firstChild) {
+        list.removeChild(list.firstChild);
+    }
+        for(let i = 0; i < items.length; i++){
+            for(let x  = 1; x < items.length - i; x++){
+                if(items[x - 1][1] < items[x][1]){
+                    let z = items[x - 1];
+                    items[x - 1] = items[x];
+                    items[x] = z;
+                }
+            }
+        }
+        console.log(items);
+        for(let i = 0; i < items.length; i++){
+            var item = document.createElement("li");
+            item.id = i;
+            let span = document.createElement("span");
+            span.classList.add("span");
+            span.textContent = items[i][1];
+            item.appendChild(document.createTextNode(items[i][0]));
+            item.appendChild(span);
+            item.classList.add("list-item");
+            list.appendChild(item);
+        }
+    }
+        window.addEventListener('keydown', function(event) {
+    const key = event.key; // "a", "1", "Shift", etc.
+    if(key === "s"){
+    randomChoice();
+    }
+});
+       function randomChoice(){
+         let options = document.getElementsByClassName("option");
+         for(let i = 0; i < options.length; i++){
+            let id = Math.floor(Math.random() * 7);
+            if(i > 0){
+                while(id == options[i - 1].id){
+                    id = Math.floor(Math.random() * 7);
+                }
+                
+            }   
+            options[i].id = id;
+            let text;
+            for(let x = 0; x < items.length; x++){
+                if(items[x][2] === id){
+                    text = items[x][0];
+                }
+            }
+           
+            options[i].firstChild.remove();
+            let h1 = document.createElement("h1");
+            h1.innerHTML = text;
+            h1.classList.add("option-text");
+            options[i].appendChild(h1);
+         }
+         
+       }
+function alertId(e){
+    let options = document.getElementsByClassName("option");
+    let other_id;
+for(let i = 0; i < options.length; i++){
+    if(options[i].id !== e){
+        other_id = options[i].id;
+    }
+}
+let e1;
+let e2;
+for(let i = 0; i < items.length; i++){
+if(items[i][2] == e){
+    e1 = items[i][1];
+}
+else if(items[i][2] == other_id){
+    e2 = items[i][1];
+}
+
+}
+console.log(e + "other: " + other_id);
+calcExpected(e1, e2, e, other_id, e);
+console.log(e1 + " " + e2 + " " + e + " " + other_id);
+rank();
+randomChoice();
+
+}
+function calcExpected(elo1, elo2 , id1, id2, id_winner){
+let elo1_elo = 1/(1 + Math.pow(10, (elo2 - elo1)/400));
+let elo2_elo = 1/(1 + Math.pow(10, (elo1 - elo2)/400));
+
+for(let i = 0; i < items.length; i++){
+    if(items[i][2] == id1){
+        let actual;
+        if(id1 == id_winner){
+            actual = 1;
+        }
+        else{
+            actual = 0;
+        }
+        items[i][1] += Math.round(eloConstant * (actual - elo1_elo));
+    }
+    else if(items[i][2] == id2){
+        let actual;
+        if(id2 == id_winner){
+            actual = 1;
+        }
+        else{
+            actual = 0;
+        }
+        items[i][1] += Math.round(eloConstant * (actual - elo2_elo));
+    }
+}
+}
+    </script>
+    </body>
+    
+</html>

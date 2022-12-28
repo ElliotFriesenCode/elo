@@ -1,0 +1,126 @@
+:root{
+    --left-color: #754F44;
+    --right-color: #FBFFB9;
+  }
+
+.header{
+   color: var(--right-color);
+   margin: 0;
+   padding: 0;
+   text-align: center;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+.header-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100px;
+}
+.center{
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh);
+   
+    width: 100%;
+}
+.box-left{
+    height: 100%;
+    width: 70vw;
+    background-color: var(--left-color);
+    text-align: center;
+    display: flex;
+   
+    align-items: center;
+    flex-direction: column;
+}
+.choose-main-box{
+    width: 800px;
+    height: calc(100% - 30vh);
+    border: 2px solid var(--right-color);
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+}
+
+.choose-header-div{
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box-right{
+    height: 100%;
+    width: 30vw;
+    background-color: var(--right-color);
+ display: flex;
+   
+    align-items: center;
+    flex-direction: column;
+}
+.option{
+    width: 300px;
+    height: 300px;
+    border: 2px solid var(--right-color);
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.option-text{
+    color: var(--right-color);
+    font-size: 50px;
+    transition: 0.5s;
+}
+
+
+.ranking-header-div{
+    width: 100%;
+    height: 20vh;
+    border-bottom: 2px solid var(--right-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ranking{
+    color: var(--left-color);
+    text-align: center;
+}
+.ranking-holder{
+    width: 80%;
+    height: calc(100% - 30vh);
+    border: 2px solid var(--left-color);
+}
+.list-item{
+    color: var(--left-color);
+    font-size: 25px;
+    padding: 20px;
+    position: relative;
+}
+.choice-header{
+    color: var(--right-color);
+}
+.option:hover{
+    background-color: var(--right-color);
+    cursor: pointer;
+   
+}
+.option:hover * {
+   
+    color: var(--left-color);
+    
+}
+.span{
+   position: absolute;
+   right: 50px;
+    color: #754f44a1;
+}
